@@ -1,6 +1,5 @@
-assume cs:code ds:data
 data segment    
-    arr1 db -13, 21, 17,-50, -5, 99      ; array
+    arr1 db -13, 35, -17, 0, -5, 99    ; array
     negnos db 0         
     posnos db 0         
 data ends      
@@ -13,12 +12,12 @@ start:
     MOV CL, 6            
     l1:                  
         MOV AL, [SI]     
-        CMP AL, 0       
-        JG pos           
-        INC negnos                
+        SHL AL, 01       
+        JC ne           
+        INC posnos                
         JMP here                
-        pos:    
-            INC posnos   
+        ne:    
+            INC negnos   
         
         here:  
         INC SI            
