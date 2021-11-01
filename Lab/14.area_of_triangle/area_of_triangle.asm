@@ -24,7 +24,8 @@ start:
     int 21h       
     sub al, 30h    
     mul bl     
-    mov bl, al    
+    mov bl, al  
+    mov bh, ah  
     mov dx,offset msg3
     mov ah,9
     int 21h  
@@ -37,12 +38,19 @@ start:
     div bl    
     mov bl, ah
     add al, 30h
-    mov dl, al
-    mov ah, 02h
-    int 21h
+    ;mov offset msg4[2], al
     add ah, 30h
-    mov dl, ah
-    mov ah, 02h
+    ;mov offset msg4[3], ah         
+    ;mov dx,offset msg4
+    ;mov ah,9
+    ;int 21h
+    
+    mov dl,al
+    mov bh, ah
+    mov ah,02h
+    int 21h 
+    mov dl,bh
+    mov ah,02h
     int 21h
   
 end
