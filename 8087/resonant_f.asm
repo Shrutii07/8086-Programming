@@ -1,8 +1,14 @@
+.model small
+.data
 RES DD ?
 L1 DD 0.0001
 C1 DD 47E-6
 
-FR PROC NEAR
+.code
+.startup
+mov ax, @data
+mov ds,ax
+  FINIT
   FLD L1
   FMUL C1
   FSQRT 
@@ -12,5 +18,5 @@ FR PROC NEAR
   FLD1
   FDIVR
   FSTP RES
-  RET
-FR ENDP
+.exit
+end
