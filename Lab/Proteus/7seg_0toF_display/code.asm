@@ -21,7 +21,7 @@ start:
     mov di, 0
     
 l0: mov cx, 1fffh 
-l1: mov al, s1[si]  ;getting out codes for 0-f in al
+l1: mov al, s1[si] ;getting out codes for 0-f in al
     mov dx, porta 
     out dx, al ;sending the code out on port a
     loop l1 
