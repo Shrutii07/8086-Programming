@@ -51,6 +51,7 @@ endm
     start: 
     mov ax,@data
     mov ds,ax
+    finit
     
     ;call given
     ;masmcall calculate_mean
