@@ -1,11 +1,19 @@
-ASSUME DS:DATA,CS:CODE
+       ASSUME DS:DATA,CS:CODE
 
 DATA SEGMENT
     A DB 5  
     msg1 db "Factorial = $"
 DATA ENDS    
 
-CODE SEGMENT     
+CODE SEGMENT 
+    scall macro xx       ;macro to display
+        pusha
+        lea dx,xx
+        mov ah,09h
+        int 21h
+        popa
+    endm 
+    
     START:
           MOV AX,DATA
           MOV DS,AX
@@ -17,15 +25,17 @@ CODE SEGMENT
           CMP CL,01
           JNZ L1  
            
-          call PRINT_STRING
-          call PRINT   
+          scall msg1
+          call PRINT 
+          call PRINT_NL 
           
+           
           MOV AH,4CH
           INT 21H  
                    
                    
 PRINT PROC		
-	
+	pusha
 	;initialize count
 	mov cx,0
 	mov dx,0
@@ -72,18 +82,14 @@ PRINT PROC
 		dec cx
 		jmp print1
 exit:
+popa
 ret
-PRINT ENDP
+PRINT ENDP  
 
 
-PRINT_STRING PROC  
-     PUSHA
-     MOV AH , 09H
-     LEA DX , msg1
-     INT 21H  
-     POPA 
-     RET
-PRINT_STRING ENDP 
+ 
+
+
 
 PRINT_NL PROC
         PUSHA                     ; Printing New Line
