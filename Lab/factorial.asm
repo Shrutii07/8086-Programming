@@ -6,7 +6,7 @@ DATA SEGMENT
 DATA ENDS    
 
 CODE SEGMENT 
-    scall macro xx       ;macro to display
+    sprint macro xx       ;macro to display
         pusha
         lea dx,xx
         mov ah,09h
@@ -25,7 +25,7 @@ CODE SEGMENT
           CMP CL,01
           JNZ L1  
            
-          scall msg1
+          sprint msg1
           call PRINT 
           call PRINT_NL 
           
@@ -85,11 +85,6 @@ exit:
 popa
 ret
 PRINT ENDP  
-
-
- 
-
-
 
 PRINT_NL PROC
         PUSHA                     ; Printing New Line
